@@ -1,4 +1,4 @@
-# 🤖 FAQ Semantic Search Chatbot
+# FAQ Semantic Search Chatbot
 
 A production-ready REST API that answers user questions using **semantic search** — not keyword matching.  
 Built with **FastAPI**, **PostgreSQL + pgvector**, and **sentence-transformers**.
@@ -173,43 +173,8 @@ pytest tests/ -v
 
 ---
 
-## 🛠️ Key Tech Decisions
 
-| Decision | Why |
-|----------|-----|
-| **pgvector** over a dedicated vector DB (Pinecone, Weaviate) | Keeps the stack simple — one DB for both relational data and vectors |
-| **all-MiniLM-L6-v2** embedding model | Fast (384 dims), small (~90 MB), great for semantic similarity |
-| **IVFFlat index** on the embedding column | Sub-linear search time as FAQs scale to 100k+ rows |
-| **Async SQLAlchemy + asyncpg** | Non-blocking DB calls — FastAPI stays fully async |
-| **QueryLog table** | Audit trail of every question asked — useful for analytics & retraining |
 
----
-
-## 🧩 Extending the Project (CV bonus points)
-
-| Feature | Effort |
-|---------|--------|
-| `DELETE /faq/{id}` endpoint | ~15 min |
-| Pagination on `GET /faq/` | ~20 min |
-| Add a `GET /logs` endpoint to see query history | ~20 min |
-| Re-embed all FAQs when switching models (migration script) | ~1 hr |
-| Add JWT auth to the admin `POST /faq/` endpoint | ~1 hr |
-| Simple React/HTML frontend | ~2 hr |
-| Alembic migrations instead of raw `init.sql` | ~1 hr |
-
----
-
-## 🌱 Environment Variables
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `POSTGRES_USER` | `faquser` | DB username |
-| `POSTGRES_PASSWORD` | `faqpassword` | DB password |
-| `POSTGRES_DB` | `faqdb` | Database name |
-| `DATABASE_URL` | *(auto)* | Full connection string |
-| `EMBEDDING_MODEL` | `all-MiniLM-L6-v2` | sentence-transformers model name |
-
----
 
 ## 📚 Learning Resources
 
